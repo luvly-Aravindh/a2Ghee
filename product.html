@@ -408,7 +408,7 @@ html{scroll-behavior:smooth}
 @media (max-width:700px){.sumrow .l span{display:block;margin:2px 0 0}.sumrow .l b{font-size:16.5px}}
 .tax{font-size:13.5px;color:var(--mut);margin-top:2px}
 .price .pct{color:#e06b1f;font:700 15px var(--hf)}
-.btns{display:grid;grid-template-columns:1fr 1.25fr;gap:10px;margin-top:14px}
+.btns{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
 .btn2{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid var(--gd);background:#fff;color:var(--gd);border-radius:999px;padding:15px 14px;font:700 15.5px/1.15 var(--hf);letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:background .15s}
 .btn2:hover{background:var(--mint)}
 .btn2.go{background:var(--g);border-color:var(--g);color:#fff}
@@ -421,7 +421,7 @@ html{scroll-behavior:smooth}
 .sbar .acts .cta{padding:13px 18px;font-size:14px;animation:none}
 @media (max-width:700px){
   .sbar .info2{display:none}
-  .sbar .acts{flex:1;display:grid;grid-template-columns:1fr 1fr}
+  .sbar .acts{flex:1;display:grid;grid-template-columns:1fr}
   .sbar .btn2,.sbar .acts .cta{padding:14px 6px;font-size:13.5px;letter-spacing:.04em}
 }
 .flow .fs{padding:0 0 18px;overflow:hidden}
@@ -606,8 +606,7 @@ html{scroll-behavior:smooth}
     </div>
 
     <div class="btns" id="btns">
-      <button class="btn2" id="addBtn" type="button"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg><span>Add to Cart</span></button>
-      <button class="cta" id="buyNow" type="button">⚡ Buy Now</button>
+      <button class="cta" id="addBtn" type="button"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg><span>Add to Cart</span></button>
     </div>
     <div class="secure">🔒 Secure payment by UPI, cards or netbanking · Quick checkout</div>
 
@@ -817,7 +816,7 @@ html{scroll-behavior:smooth}
   <img src="https://cdn.shopify.com/s/files/1/0692/6781/6559/files/gheelistingimages01.png?v=1776847932&width=120" width="52" height="52" alt="" loading="lazy" decoding="async">
   <div class="info2"><div class="nm">Eliqo A2 Gir Cow Ghee</div><div class="pr"><b id="bTot">₹2,598</b><s id="bWas"></s> <span id="bQty">2 jars</span></div></div>
   <div class="qbox"><span>Jars</span><div class="bq"><button type="button" id="bMinus" tabindex="-1" aria-label="One jar less">−</button><output id="bOut" aria-live="polite">2</output><button type="button" id="bPlus" tabindex="-1" aria-label="One jar more">+</button></div><div class="qline"><b id="bTotM">₹2,598</b><s id="bWasM"></s></div></div>
-  <div class="acts"><button class="btn2" id="addBtn2" type="button" tabindex="-1"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg><span>Add to Cart</span></button><button class="cta" id="buyNow2" type="button" tabindex="-1">⚡ Buy Now</button></div>
+  <div class="acts"><button class="cta" id="addBtn2" type="button" tabindex="-1"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg><span>Add to Cart</span></button></div>
 </div></div>
 
 <div class="dw" id="dw" hidden>
@@ -917,7 +916,7 @@ html{scroll-behavior:smooth}
   $('bMinus').addEventListener('click',function(){setQ(sel.q-1)});
   $('bPlus').addEventListener('click',function(){setQ(sel.q+1)});
 
-  /* Add to Cart / Buy Now add the selection to the customer's existing cart on eliqonaturals.com.
+  /* shopAdd hands the selection (or the drawer's bag at Check out) to the customer's existing cart on eliqonaturals.com.
      /cart/add only adds lines, so anything already in their cart stays. It is opened as a normal link (GET),
      so the browser sends the store's cart cookie and Shopify adds to that cart, not a new one. */
   function shopAdd(items,dest){
@@ -1045,7 +1044,6 @@ html{scroll-behavior:smooth}
   dw.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.matches('.qty input')){e.preventDefault();e.target.blur()}});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!dw.hidden)closeCart()});
   addBtns.forEach(function(b){b.addEventListener('click',function(){addToCart(b)})});
-  [$('buyNow'),$('buyNow2')].forEach(function(b){b.addEventListener('click',function(){busy(b);shopAdd(selItems(),'/checkout')})});
   $('cartBtn').addEventListener('click',function(){
     openCart();work(Promise.resolve());
   });
@@ -1089,7 +1087,7 @@ html{scroll-behavior:smooth}
   /* sticky bar once the main buttons scroll off */
   var bar=$('sbar');
   if('IntersectionObserver' in window){
-    new IntersectionObserver(function(e){var s=!e[0].isIntersecting&&e[0].boundingClientRect.top<0;bar.classList.toggle('on',s);bar.setAttribute('aria-hidden',s?'false':'true');[$('addBtn2'),$('buyNow2'),$('bMinus'),$('bPlus')].forEach(function(x){x.tabIndex=s?0:-1})}).observe($('btns'));
+    new IntersectionObserver(function(e){var s=!e[0].isIntersecting&&e[0].boundingClientRect.top<0;bar.classList.toggle('on',s);bar.setAttribute('aria-hidden',s?'false':'true');[$('addBtn2'),$('bMinus'),$('bPlus')].forEach(function(x){x.tabIndex=s?0:-1})}).observe($('btns'));
   }
 })();
 </script>

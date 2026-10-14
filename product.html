@@ -455,6 +455,59 @@ html{scroll-behavior:smooth}
 .reel .snd .i-on,.reel.sound .snd .i-off{display:none}
 .reel.sound .snd .i-on{display:block}
 .reel .snd:focus-visible{outline:2px solid #fff;outline-offset:2px}
+/* cart drawer: the visitor's Shopify cart, laid out like the eliqonaturals.com drawer */
+.dw{position:fixed;inset:0;z-index:90}
+.dw[hidden]{display:none}
+.dw-bg{position:absolute;inset:0;background:rgba(18,18,18,.5);opacity:0;transition:opacity .25s}
+.dw-p{position:absolute;top:0;right:0;bottom:0;width:min(400px,100%);background:#fff;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s ease;box-shadow:-10px 0 40px -18px rgba(0,0,0,.35);color:var(--ink)}
+.dw.open .dw-bg{opacity:1}
+.dw.open .dw-p{transform:none}
+.dw-h{display:flex;align-items:center;justify-content:space-between;padding:22px 24px 10px}
+.dw-h h2{font:500 22px/1.2 var(--hf);letter-spacing:.01em}
+.dw-x{width:44px;height:44px;margin-right:-12px;border:0;background:none;color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.dw-x svg{width:18px;height:17px}
+.dw-b{flex:1;overflow-y:auto;padding:0 24px 16px;overscroll-behavior:contain;transition:opacity .15s}
+.dw.busy .dw-b,.dw.busy .dw-f{opacity:.55;pointer-events:none}
+.dw-cols{display:flex;justify-content:space-between;padding:12px 0 10px;border-bottom:1px solid var(--line);color:var(--mut);font:400 10.5px/1 var(--bf);letter-spacing:.13em;text-transform:uppercase}
+.cl{display:grid;grid-template-columns:72px minmax(0,1fr) auto;column-gap:14px;padding:20px 0 0}
+.cl-m{grid-row:span 2}
+.cl-m img{width:72px;height:auto;max-height:100px;object-fit:contain;display:block}
+.cl-n{display:block;color:var(--ink);font:500 13.5px/1.45 var(--bf);text-decoration:none;word-break:break-word}
+.cl-n:hover{text-decoration:underline;text-underline-offset:3px}
+.cl-o{margin:5px 0 0;color:var(--mut);font-size:13px;line-height:1.5}
+.cl-o s{margin-right:6px}
+.cl-o dt,.cl-o dd{display:inline;margin:0}
+.cl-t{text-align:right;font:400 14px/1.45 var(--bf);white-space:nowrap}
+.cl-t s{display:block;color:var(--mut);font-size:12.5px}
+.cl-q{grid-column:2/-1;display:flex;align-items:center;gap:10px;margin-top:12px}
+.qty{display:inline-flex;align-items:center;height:42px;border:1px solid rgba(27,38,33,.55);color:var(--ink)}
+.qty button{width:40px;height:100%;border:0;background:none;color:inherit;cursor:pointer;display:grid;place-items:center}
+.qty button svg{width:10px;height:10px}
+.qty button:disabled{opacity:.3;cursor:default}
+.qty input{width:34px;height:100%;border:0;background:none;text-align:center;font:400 14px var(--bf);color:inherit;-moz-appearance:textfield;appearance:textfield}
+.qty input::-webkit-outer-spin-button,.qty input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.cl-rm{width:40px;height:40px;border:0;background:none;color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.cl-rm svg{width:16px;height:16px}
+.cl-e{grid-column:2/-1;display:flex;gap:6px;align-items:flex-start;margin-top:8px;color:var(--red);font-size:12.5px;line-height:1.4}
+.cl-e svg{flex:none;width:13px;height:13px;margin-top:1px}
+.dw-disc{list-style:none;margin:6px 0 0;padding:0}
+.dw-disc li{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--mut)}
+.dw-f .dw-disc li{justify-content:flex-end;color:var(--ink);font-size:13.5px;margin-bottom:8px}
+.dw-disc svg{flex:none;width:12px;height:12px}
+.dw-f{border-top:1px solid var(--line);padding:18px 24px calc(20px + env(safe-area-inset-bottom))}
+.dw-tot{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.dw-tot h3{font:500 15px var(--hf)}
+.dw-tot p{font:400 17px var(--bf)}
+.dw-tx{margin:6px 0 16px;color:var(--mut);font-size:12.5px;line-height:1.5}
+.dw-tx a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.dw-co{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;border:0;border-radius:8px;background:var(--g);color:#fff;font:500 15px var(--bf);letter-spacing:.03em;text-decoration:none;cursor:pointer}
+.dw-co:hover{background:var(--gd)}
+.dw-empty{text-align:center;padding:60px 4px 24px}
+.dw-empty h3{font:500 22px var(--hf);margin-bottom:20px}
+.dw-empty .dw-co{max-width:260px;margin:0 auto}
+.dw-err{display:flex;gap:6px;align-items:flex-start;margin-top:14px;color:var(--red);font-size:13px;line-height:1.4}
+.dw-err svg{flex:none;width:13px;height:13px;margin-top:2px}
+@media (prefers-reduced-motion:reduce){.dw-p,.dw-bg{transition:none}}
 </style>
 </head>
 <body>
@@ -767,6 +820,16 @@ html{scroll-behavior:smooth}
   <div class="acts"><button class="btn2" id="addBtn2" type="button" tabindex="-1"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg><span>Add to Cart</span></button><button class="cta" id="buyNow2" type="button" tabindex="-1">⚡ Buy Now</button></div>
 </div></div>
 
+<div class="dw" id="dw" hidden>
+  <div class="dw-bg" data-close></div>
+  <aside class="dw-p" role="dialog" aria-modal="true" aria-labelledby="dwT">
+    <div class="dw-h"><h2 id="dwT">Your cart</h2><button class="dw-x" type="button" data-close aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 17" aria-hidden="true"><path fill="currentColor" d="M.865 15.978a.5.5 0 0 0 .707.707l7.433-7.431 7.579 7.282a.501.501 0 0 0 .846-.37.5.5 0 0 0-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 1 0-.707-.708L8.991 7.853 1.413.573a.5.5 0 1 0-.693.72l7.563 7.268z"/></svg></button></div>
+    <div class="dw-b" id="dwBody"></div>
+    <div class="dw-f" id="dwFoot"></div>
+    <p class="sr" id="dwLive" role="status"></p>
+  </aside>
+</div>
+
 <script>
 (function(){
   /* ===== EDIT HERE ===== */
@@ -811,7 +874,8 @@ html{scroll-behavior:smooth}
     }).catch(function(){}).then(function(){if(--left===0&&changed&&cb)cb()})});
   }
   var lastCnt=null;
-  function showCount(b){var c=count(b),el=document.getElementById('cartCnt');el.textContent=c;el.hidden=!c;if(lastCnt!==null&&c>lastCnt){el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump')}lastCnt=c}
+  function showCount(b){showN(count(b))}
+  function showN(c){var el=document.getElementById('cartCnt');el.textContent=c;el.hidden=!c;if(lastCnt!==null&&c>lastCnt){el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump')}lastCnt=c}
   var $=function(id){return document.getElementById(id)};
   var esc=function(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
   var pct=function(m,n){return m>n?Math.round((m-n)/m*100):0};
@@ -868,22 +932,136 @@ html{scroll-behavior:smooth}
   function busy(b){b.disabled=true;b.setAttribute('aria-busy','true');setTimeout(function(){b.disabled=false;b.removeAttribute('aria-busy')},6000)}
   var addBtns=[$('addBtn'),$('addBtn2')];
   function setGo(){}
-  addBtns.forEach(function(b){b.addEventListener('click',function(){busy(b);shopAdd(selItems(),'/cart')})});
+  /* ---------- cart drawer ----------
+     When this page is served from the shop's own domain, Add to Cart uses Shopify's AJAX cart: /cart/add.js adds
+     the selection to the visitor's existing cart and the drawer shows that cart, where quantities can be changed
+     and items removed. Browsers block these calls from any other domain, so there the drawer runs on the page's
+     saved bag instead (see store below). */
+  var LIVE=(function(){try{var h=function(x){return x.replace(/^www[.]/,'')};return h(new URL(CFG.shop).hostname)===h(location.hostname)}catch(e){return false}})();
+  var dw=$('dw'),cart=null,dwErr='',opener=null;
+  function api(path,body){
+    var o={credentials:'same-origin',headers:{Accept:'application/json'}};
+    if(body){o.method='POST';o.headers['Content-Type']='application/json';o.body=JSON.stringify(body)}
+    return fetch(path,o).then(function(r){return r.json().then(function(d){if(!r.ok)throw d;return d})});
+  }
+  function why(d){return (d&&(d.description||d.message))||'Something went wrong. Please try again.'}
+  /* Off the store's domain the drawer runs on the page's own bag (the same one the home page drawer uses).
+     Check out then hands every item to the store with /cart/add, which keeps what is already in the customer's
+     Shopify cart, and goes on to Shopify checkout. */
+  function keyOf(v){return KEYS.filter(function(k){return String(CAT[k].v)===String(v)})[0]}
+  function bagCart(){
+    var items=KEYS.filter(function(k){return bag[k]}).map(function(k){var u=unit(k),q=bag[k];
+      return{key:k,handle:CAT[k].h,variant_id:CAT[k].v,quantity:q,product_title:CAT[k].n,options_with_values:[{name:'Size',value:CAT[k].s}],
+        image:CAT[k].img.replace(/[&?]width=\d+/,''),original_price:u,final_price:u,original_line_price:u*q,final_line_price:u*q}});
+    return{items:items,item_count:count(bag),total_price:items.reduce(function(t,i){return t+i.final_line_price},0),cart_level_discount_applications:[]};
+  }
+  function bagSet(k,q){
+    if(q>CAT[k].max){var e={description:'You can only add '+CAT[k].max+' of '+CAT[k].n+' to the cart.'};if(!bag[k])return Promise.reject(e);bag[k]=CAT[k].max;save();return Promise.reject(e)}
+    if(q>0)bag[k]=q;else delete bag[k];save();return Promise.resolve();
+  }
+  var store={
+    load:function(){return LIVE?api('/cart.js'):Promise.resolve(bagCart())},
+    add:function(items){
+      if(LIVE)return api('/cart/add.js',{items:items.map(function(it){return{id:+it.v,quantity:it.q}})});
+      bag=readBag();var over=items.filter(function(it){var k=keyOf(it.v);return (bag[k]||0)+it.q>CAT[k].max})[0];
+      if(over){var k=keyOf(over.v);return Promise.reject({description:'You can only add '+(CAT[k].max-(bag[k]||0))+' more of '+CAT[k].n+' to the cart.'})}
+      items.forEach(function(it){var k=keyOf(it.v);bag[k]=(bag[k]||0)+it.q});save();return Promise.resolve();
+    },
+    change:function(key,q){return LIVE?api('/cart/change.js',{id:key,quantity:q}):bagSet(key,q)}
+  };
+  function loadCart(){return store.load().then(function(c){cart=c;showN(c.item_count);return c})}
+  var IC={
+    minus:'<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 2" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M.5 1C.5.7.7.5 1 .5h8a.5.5 0 1 1 0 1H1A.5.5 0 0 1 .5 1" clip-rule="evenodd"/></svg>',
+    plus:'<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 10" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M1 4.51a.5.5 0 0 0 0 1h3.5l.01 3.5a.5.5 0 0 0 1-.01V5.5l3.5-.01a.5.5 0 0 0-.01-1H5.5L5.49.99a.5.5 0 0 0-1 .01v3.5l-3.5.01z" clip-rule="evenodd"/></svg>',
+    bin:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M14 3h-3.53a3.07 3.07 0 0 0-.6-1.65C9.44.82 8.8.5 8 .5s-1.44.32-1.87.85A3.06 3.06 0 0 0 5.53 3H2a.5.5 0 0 0 0 1h1.25v10c0 .28.22.5.5.5h8.5a.5.5 0 0 0 .5-.5V4H14a.5.5 0 0 0 0-1M6.91 1.98c.23-.29.58-.48 1.09-.48s.85.19 1.09.48c.2.24.3.6.36 1.02h-2.9c.05-.42.17-.78.36-1.02m4.84 11.52h-7.5V4h7.5z"/><path fill="currentColor" d="M6.55 5.25a.5.5 0 0 0-.5.5v6a.5.5 0 0 0 1 0v-6a.5.5 0 0 0-.5-.5m2.9 0a.5.5 0 0 0-.5.5v6a.5.5 0 0 0 1 0v-6a.5.5 0 0 0-.5-.5"/></svg>',
+    tag:'<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M7 0h3a2 2 0 0 1 2 2v3a1 1 0 0 1-.3.7l-6 6a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 0-1.4l6-6A1 1 0 0 1 7 0m2 2a1 1 0 1 0 2 0 1 1 0 0 0-2 0" clip-rule="evenodd"/></svg>',
+    err:'<svg viewBox="0 0 13 13" aria-hidden="true"><circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B"/><path fill="#fff" d="m5.874 3.528.1 4.044h1.053l.1-4.044zm.627 6.133c.38 0 .68-.288.68-.656s-.3-.656-.68-.656-.681.288-.681.656.3.656.68.656"/></svg>'
+  };
+  /* the store's money format: ₹ 1,299.00 */
+  function money(p){return '₹ '+(p/100).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2})}
+  function renderCart(){
+    var body=$('dwBody'),foot=$('dwFoot'),c=cart,x='';
+    var err=function(m){return m?'<p class="dw-err" role="alert">'+IC.err+'<span>'+esc(m)+'</span></p>':''};
+    if(!c||!c.item_count){
+      body.innerHTML='<div class="dw-empty"><h3>Your cart is empty</h3><button class="dw-co" type="button" data-close>Continue shopping</button></div>'+err(dwErr);
+      foot.hidden=true;foot.innerHTML='';return;
+    }
+    foot.hidden=false;
+    x='<div class="dw-cols" aria-hidden="true"><span>Product</span><span>Total</span></div>';
+    c.items.forEach(function(it){
+      var nm=esc(it.product_title),url=esc((LIVE?'':CFG.shop)+'/products/'+it.handle+'?variant='+it.variant_id);
+      var img=it.image?it.image+(it.image.indexOf('?')<0?'?':'&')+'width=300':'';
+      var alt=it.featured_image&&it.featured_image.alt?esc(it.featured_image.alt):'';
+      var opts=(it.options_with_values||[]).filter(function(o){return o.value!=='Default Title'}).map(function(o){return '<div><dt>'+esc(o.name)+':</dt> <dd>'+esc(o.value)+'</dd></div>'}).join('');
+      var ld=(it.line_level_discount_allocations||[]).map(function(a){return '<li>'+IC.tag+esc(a.discount_application&&a.discount_application.title||'Discount')+' (-'+money(a.amount)+')</li>'}).join('');
+      var mine=lineErr.key===it.key;
+      x+='<div class="cl" data-key="'+esc(it.key)+'">'
+        +'<a class="cl-m" href="'+url+'" tabindex="-1" aria-hidden="true">'+(img?'<img src="'+esc(img)+'" width="150" height="150" alt="'+alt+'" loading="lazy" decoding="async">':'')+'</a>'
+        +'<div><a class="cl-n" href="'+url+'">'+nm+'</a>'
+        +'<div class="cl-o">'+(it.original_price>it.final_price?'<s>'+money(it.original_price)+'</s>':'')+money(it.final_price)+'</div>'
+        +(opts?'<dl class="cl-o">'+opts+'</dl>':'')+(ld?'<ul class="dw-disc" aria-label="Discount">'+ld+'</ul>':'')+'</div>'
+        +'<div class="cl-t">'+(it.original_line_price>it.final_line_price?'<s>'+money(it.original_line_price)+'</s>':'')+money(it.final_line_price)+'</div>'
+        +'<div class="cl-q"><div class="qty">'
+          +'<button type="button" data-act="minus"'+(it.quantity<=1?' disabled':'')+' aria-label="Decrease quantity for '+nm+'">'+IC.minus+'</button>'
+          +'<input type="number" inputmode="numeric" min="0" step="1" value="'+it.quantity+'" aria-label="Quantity for '+nm+'">'
+          +'<button type="button" data-act="plus" aria-label="Increase quantity for '+nm+'">'+IC.plus+'</button>'
+        +'</div><button class="cl-rm" type="button" data-act="rm" aria-label="Remove '+nm+'">'+IC.bin+'</button></div>'
+        +(mine?'<div class="cl-e" role="alert">'+IC.err+'<span>'+esc(lineErr.msg)+'</span></div>':'')
+        +'</div>';
+    });
+    body.innerHTML=x+err(dwErr);
+    var dc=(c.cart_level_discount_applications||[]).map(function(a){return '<li>'+IC.tag+esc(a.title)+' (-'+money(a.total_allocated_amount)+')</li>'}).join('');
+    foot.innerHTML=(dc?'<ul class="dw-disc" aria-label="Discount">'+dc+'</ul>':'')
+      +'<div class="dw-tot" role="status"><h3>Estimated total</h3><p>'+money(c.total_price)+'</p></div>'
+      +'<p class="dw-tx">Taxes included. Discounts and <a href="'+(LIVE?'':CFG.shop)+'/policies/shipping-policy">shipping</a> calculated at checkout.</p>'
+      +(LIVE?'<a class="dw-co" href="/checkout'+(keep.length?'?'+keep.join('&'):'')+'">Check out</a>':'<button class="dw-co" type="button" data-checkout>Check out</button>');
+  }
+  function openCart(from){
+    renderCart();if(!dw.hidden)return;opener=from||document.activeElement;
+    dw.hidden=false;requestAnimationFrame(function(){dw.classList.add('open')});document.body.style.overflow='hidden';dw.querySelector('.dw-x').focus();
+  }
+  function closeCart(){dw.classList.remove('open');document.body.style.overflow='';setTimeout(function(){dw.hidden=true},300);if(opener&&opener.focus)opener.focus()}
+  /* run a cart change, then always re-read the cart so the drawer shows exactly what Shopify holds */
+  var lineErr={};
+  function work(p,key){dw.classList.add('busy');lineErr={};return p.then(function(){dwErr=''},function(d){if(key){lineErr={key:key,msg:why(d)};dwErr=''}else dwErr=why(d)}).then(function(){return loadCart().catch(function(){})}).then(function(){dw.classList.remove('busy');renderCart();$('dwLive').textContent=cart?'Cart updated. Estimated total '+money(cart.total_price):''})}
+  function addToCart(b){
+    busy(b);dwErr='';
+    var pre=LIVE&&cpnOn('ghee')?fetch('/discount/'+encodeURIComponent(CPN.code),{credentials:'same-origin'}).catch(function(){}):Promise.resolve();
+    work(pre.then(function(){return store.add(selItems())})).then(function(){
+      b.disabled=false;b.removeAttribute('aria-busy');openCart(b);
+    });
+  }
+  function setLine(row,q){var key=row.dataset.key;work(store.change(key,Math.max(0,q)),key)}
+  dw.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-act]');
+    if(b){var row=b.closest('.cl'),q=parseInt(row.querySelector('input').value,10)||0;setLine(row,b.dataset.act==='rm'?0:b.dataset.act==='plus'?q+1:q-1);return}
+    var co=e.target.closest('[data-checkout]');
+    if(co){bag=readBag();var hand=KEYS.filter(function(k){return bag[k]}).map(function(k){return{v:CAT[k].v,q:bag[k]}});
+      if(hand.length){busy(co);bag={};save();shopAdd(hand,'/checkout')}return}
+    if(e.target.closest('[data-close]'))closeCart();
+  });
+  /* typing a quantity: update when the field is left or Enter is pressed */
+  dw.addEventListener('change',function(e){if(e.target.matches('.qty input')){var v=parseInt(e.target.value,10);setLine(e.target.closest('.cl'),isNaN(v)?1:v)}});
+  dw.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.matches('.qty input')){e.preventDefault();e.target.blur()}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!dw.hidden)closeCart()});
+  addBtns.forEach(function(b){b.addEventListener('click',function(){addToCart(b)})});
   [$('buyNow'),$('buyNow2')].forEach(function(b){b.addEventListener('click',function(){busy(b);shopAdd(selItems(),'/checkout')})});
-  $('cartBtn').addEventListener('click',function(){location.href=CFG.shop+'/cart'+(keep.length?'?'+keep.join('&'):'')});
+  $('cartBtn').addEventListener('click',function(){
+    openCart();work(Promise.resolve());
+  });
 
 
   /* ---------- page wiring ---------- */
-  renderSel();showCount(bag);
-  setTimeout(function(){syncPrices(renderSel)},0);
-  window.addEventListener('pageshow',function(){bag=readBag();showCount(bag)});
+  renderSel();loadCart().catch(function(){});
+  setTimeout(function(){syncPrices(function(){renderSel();if(!LIVE)loadCart().then(function(){if(!dw.hidden)renderCart()})})},0);
+  window.addEventListener('pageshow',function(e){bag=readBag();if(e.persisted||!LIVE)loadCart().then(function(){if(!dw.hidden)renderCart()}).catch(function(){})});
   if(location.hash==='#checkout'){try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
     if(count(bag)){var hand=KEYS.filter(function(k){return bag[k]}).map(function(k){return{v:CAT[k].v,q:bag[k]}});bag={};save();shopAdd(hand,'/cart')}}
   /* kitchen footage: load only near the viewport, play muted in view, pause off screen */
   var calm=false;try{calm=matchMedia('(prefers-reduced-motion: reduce)').matches||!!(navigator.connection&&navigator.connection.saveData)}catch(e){}
   var loops=[].slice.call(document.querySelectorAll('video.av'));
   var webm=false;try{webm=!!document.createElement('video').canPlayType('video/webm; codecs="vp9"')}catch(e){}
-  function arm(v){if(!v.getAttribute('src')&&v.dataset.src){v.src=webm?v.dataset.src.replace(/[.]mp4$/,'.webm'):v.dataset.src}}
+  function arm(v){if(!v.getAttribute('src')&&v.dataset.src){v.src=webm?v.dataset.src.replace(/[.]mp4(?=$|[?])/,'.webm'):v.dataset.src}}
   loops.forEach(function(v){v.muted=true;v.addEventListener('click',function(){arm(v);if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})});
   if('IntersectionObserver' in window){
     var vio=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){arm(v);if(!calm){var p=v.play();if(p&&p.catch)p.catch(function(){})}}else if(!v.paused){v.pause()}})},{rootMargin:'250px 0px'});
